@@ -1,5 +1,5 @@
 #word {
-  background-color: lightblue;
+  background-color: #e6bbad;
   text-align: center;
   min-height: 60px;
   width: 250px;
@@ -20,4 +20,10 @@
   min-width: 134px;
   border-radius: 5px;
   border: 0;
+  background-color: #99cfe0;
+}
+
+button:focus {
+  outline: 0;
+  background-color: #72bcd4;
 }
