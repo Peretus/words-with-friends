@@ -23,7 +23,7 @@
         currentRequest.abort();
       };
 
-      repeadedlyAppendPeriods();
+      repeatedlyAppendPeriods();
       currentRequest = $.get({url: "http://oseberg.io/interview/word_generator.php", success: updateWord})
       .fail(handleError);
     };
@@ -38,7 +38,7 @@
       $("#word").append(".");
     };
 
-    function repeadedlyAppendPeriods(){
+    function repeatedlyAppendPeriods(){
       timerID = setInterval(appendSinglePeriod,1000)
     }
 
@@ -51,7 +51,7 @@
       if(currentRequest){
         currentRequest.abort();
       };
-      repeadedlyAppendPeriods();
+      repeatedlyAppendPeriods();
 
       var builtURL = "http://oseberg.io/interview/shifter.php?word="+currentlyDisplayedWord()
       currentRequest = $.get({url: builtURL, success: updateWord})
