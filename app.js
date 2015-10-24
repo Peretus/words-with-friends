@@ -2,8 +2,8 @@ $(document).ready(
   
   function doYourDance(){
 
-    var timerID;
-    var currentRequest;
+    var timerID,
+      currentRequest;
 
     function handleError(error){
       updateWord(error.responseText);
@@ -13,7 +13,7 @@ $(document).ready(
       if(currentRequest){
         currentRequest.abort();
       };
-    };
+    }
 
     function currentlyActiveRequest(){
       return currentRequest.readyState !== 4;
@@ -21,11 +21,11 @@ $(document).ready(
 
     function getNewWord(){
       updateWord("Please Wait for Word.");
-      abortCurrentRequest()
+      abortCurrentRequest();
       repeatedlyAppendPeriods();
       currentRequest = $.get({url: "http://oseberg.io/interview/word_generator.php", success: updateWord})
       .fail(handleError);
-    };
+    }
 
     function updateWord(newWord){
       $("#word").text(newWord);
@@ -34,24 +34,25 @@ $(document).ready(
 
     function appendSinglePeriod(){
       $("#word").append(".");
-    };
+    }
 
     function repeatedlyAppendPeriods(){
-      timerID = setInterval(appendSinglePeriod,1000)
+      timerID = setInterval(appendSinglePeriod,1000);
     }
 
     function currentlyDisplayedWord(){
-      return $("#word").text()
+      return $("#word").text();
     }
 
     function transformWord(){
       if(!currentlyActiveRequest() && currentRequest.status == 200){
-      repeatedlyAppendPeriods();
-      var builtURL = "http://oseberg.io/interview/shifter.php?word="+currentlyDisplayedWord()
-      currentRequest = $.get({url: builtURL, success: updateWord})
-      .fail(handleError);  
+        var builtURL = "http://oseberg.io/interview/shifter.php?word="+currentlyDisplayedWord();
+        updateWord("Please Wait for Transformation.");
+        repeatedlyAppendPeriods();
+        currentRequest = $.get({url: builtURL, success: updateWord})
+        .fail(handleError);  
       };
-    };
+    }
 
     $("#get-word").on("click", getNewWord);
     $("#transform-word").on("click", transformWord);
